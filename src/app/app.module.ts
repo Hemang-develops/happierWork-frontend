@@ -19,6 +19,7 @@ import { TopbarComponent } from './components/topbar/topbar.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
+import { PaginatorComponent } from './components/paginator/paginator.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { MatSelectModule } from '@angular/material/select';
     PositionComponent,
     PlanningProjectModalComponent,
     SidebarComponent,
-    TopbarComponent
+    TopbarComponent,
+    PaginatorComponent
   ],
   imports: [
     BrowserModule,

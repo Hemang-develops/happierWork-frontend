@@ -1,0 +1,43 @@
+<!-- <div class="custom-paginator">
+    <span class="paginator-details">
+      {{ getRangeLabel() }}
+    </span>
+  
+    <div class="paginator-controls">
+      <button (click)="previousPage()" [disabled]="!hasPreviousPage()">
+        &#8249; Left caret button
+      </button>
+  
+      <span *ngFor="let page of pagesArray()" (click)="setPage(page)" class="paginator-page" [class.active]="page === currentPage">
+        {{ page }}
+      </span>
+  
+      <button (click)="nextPage()" [disabled]="!hasNextPage()">
+        &#8250; Right caret button
+      </button>
+    </div>
+  </div> -->
+  
+  <div class="custom-paginator">
+    <span class="paginator-details">
+        {{ getRangeLabel() }}
+    </span>
+    <!-- Page Numbers -->
+    <div class="paginator-controls">
+      <button (click)="previousPage()" [disabled]="!hasPreviousPage()" class="paginator-btn">
+        &#8249;
+      </button>
+  
+      <span *ngFor="let page of pagesArray()" (click)="setPage(page)" 
+            class="paginator-page" 
+            [class.active]="page === currentPage" 
+            [class.separator]="page === '...'">
+        {{ page }}
+      </span>
+  
+      <button (click)="nextPage()" [disabled]="!hasNextPage()" class="paginator-btn">
+        &#8250;
+      </button>
+    </div>
+  </div>
+  
