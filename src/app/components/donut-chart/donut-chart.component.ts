@@ -27,23 +27,33 @@ export class DonutChartComponent implements AfterViewInit, OnChanges {
       data: {
         columns: this.tableData.map(item => [item.name, item.y]),
         type: donut(),
-        colors: this.tableData.reduce((acc, item) => ({ ...acc, [item.name]: item.color }), {}),
+        colors: {
+          "Engineering": "#7AC2B3",  // Custom color for Engineering
+          "Sales": "#F4C575",        // Custom color for Sales
+          "Product": "#A4D1A5",      // Custom color for Product
+          "HR": "#b35600",           // Custom color for HR
+          "Other": "#C1DAD6"         // Custom color for Other
+        },
         labels: false // Disable labels on the chart
       },
       donut: {
-        width: 35,
+        title: `${this.usedAmount} Cr used`,
+        width: 20,
         label: {
-          show: false // Hide default donut label
+          show: false
         }
+      },
+      legend: {
+        show: false
       },
       bindto: "#donutChart"
     });
 
     // Add custom middle text
-    document.querySelector('#donutChart .bb-chart-arcs-title')!.innerHTML = `
-      <div style="font-size: 24px; font-weight: bold;">${this.usedAmount} Cr</div>
-      <div style="font-size: 14px; color: #555;">Used</div>
-      <div style="font-size: 12px; color: #888;">${this.positions} Positions</div>
-    `;
+    // document.querySelector('#donutChart .bb-chart-arcs-title')!.innerHTML = `
+    //   <div style="font-size: 24px; font-weight: bold;">${this.usedAmount} Cr</div>
+    //   <div style="font-size: 14px; color: #555;">Used</div>
+    //   <div style="font-size: 12px; color: #888;">${this.positions} Positions</div>
+    // `;
   }
 }
