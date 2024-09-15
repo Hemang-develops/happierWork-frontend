@@ -1,0 +1,77 @@
+.dashboard {
+  display: flex;
+  background-color: #f9f9f9;
+}
+
+h4 {
+  margin-left: 1rem;
+}
+
+.container {
+  margin: 1rem;
+}
+
+.projects {
+  display: flex;
+  background-color: #ffffff;
+  flex-direction: column;
+  border-radius: 10px;
+  width: 30vw;
+}
+
+.project-container {
+  display: flex;
+  justify-content: flex-start;
+  background-color: #ffffff;
+  align-items: flex-start;
+  margin: 1rem;
+  flex-direction: row;
+  gap: 4rem;
+  width: 85vw;
+  height: 65vh;
+  padding: 2rem;
+}
+
+.add-project {
+  background: #FFB414;
+  color: #000;
+  border: none;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.add-project:hover {
+  background-color: #e69d09; /* Darker shade on hover */
+}
+
+
+.planning {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem;
+}
+
+.subtitle {
+  color: gray;
+}
+
+.top {
+  background-color: gainsboro;
+}
+
+.part {
+  padding: 1rem;
+}
+
+.bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem
+}

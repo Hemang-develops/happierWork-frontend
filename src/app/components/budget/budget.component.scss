@@ -1,0 +1,81 @@
+.budget-container{
+    display: flex;
+    width: 100vw;
+    background-color: #f9f9f9;
+}
+
+.container {
+    padding: 20px;
+    width: 100%;
+  }
+  
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .chart-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .summary {
+    margin-left: 20px;
+  }
+
+  
+  
+.createBtn {
+    background-color: #FFB414;
+    color: #000000;
+    border: none;
+    border-radius: 40px; /* Rounded button */
+    cursor: pointer;
+    padding: 0.5rem 1.5rem;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.createBtn:hover {
+    background-color: #e69d09; /* Darker shade on hover */
+}
+
+input.form-control {
+    padding: 0.75rem;
+    border: 1px solid #E6E8EC;
+    font-size: 14px;
+    border-radius: 2px;
+    margin-right: 1rem;
+    transition: border-color 0.3s;
+}
+
+input.form-control:focus {
+    border-color: #FFB414; /* Highlight input on focus */
+    outline: none;
+}
+
+input.form-control::placeholder {
+    color: #C1C7D0;
+}
+
+.searchCreateContainer, .tableChartContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 1rem 0;
+}
+
+.searchContainer{
+    display: flex;
+}
+
+.searchDropdown{
+    width: 8rem;
+    padding-left: 1rem;
+    border: 1px solid #E6E8EC;
+}

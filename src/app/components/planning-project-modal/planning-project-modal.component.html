@@ -1,0 +1,41 @@
+<!-- <div class="modal-overlay" *ngIf="isModalOpen"> -->
+<div class="modal-overlay">
+  <div class="modal-content">
+     <div class="header">
+        <h3>Create Planning Project</h3>
+        <div>
+           <button class="closeBtn" (click)="onModalClose()">X</button>
+        </div>
+     </div>
+     <hr class="separator">
+     <div>
+        <form class="formGroup" [formGroup]="planningProjectForm" (ngSubmit)="onSubmit()">
+          <div class="input-container">
+             <label for="projectName" class="form-label">Project Name <span class="red">*</span></label>
+             <input class="form-control" placeholder="Enter budget in INR" formControlName="projectName" required>
+             <div *ngIf="f.projectName.touched && f.projectName.errors">
+               <small class="red">Project Name is required</small>
+             </div>
+          </div>
+
+          <div class="input-container">
+             <label for="projectDescription" class="form-label">Project Description <span class="red">*</span></label>
+             <input class="form-control" placeholder="Enter description" formControlName="projectDescription" required>
+             <div *ngIf="f.projectDescription.touched && f.projectDescription.errors">
+               <small class="red">Project Description is required</small>
+             </div>
+          </div>
+
+           <div class="input-container">
+              <label for="coplanner" class="form-label">Co-planner</label>
+              <input id="coplanner" formControlName="coplanner" class="form-control" placeholder="Add any co-planner" />
+           </div>
+           <hr class="separator">
+
+           <div class="btn-container">
+              <button type="submit" class="submitbutton" [disabled]="planningProjectForm.invalid"><strong>Create</strong></button>
+           </div>
+        </form>
+     </div>
+  </div>
+</div>
