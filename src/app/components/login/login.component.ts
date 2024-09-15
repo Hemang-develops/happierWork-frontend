@@ -25,8 +25,8 @@ export class LoginComponent implements OnInit{
   onSubmit() {
     if(this.loginForm.valid){
       console.log('Form value:', this.loginForm.value);
+      this.router.navigate(['/budget']);
     }
-    this.router.navigate(['/dashboard']);
     // Add logic to handle the login action, e.g., call an authentication service
   }
 

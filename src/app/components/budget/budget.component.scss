@@ -1,27 +1,26 @@
 .budget-container {
     display: flex;
-    width: 100vw;
     background-color: #f9f9f9;
-}
-
-.main-content {
-    width: 100%;
-    // overflow: hidden;
-}
-
-.content-container {
-    padding: 20px;
-    width: 100%;
+    // width: 100%;
+    display: flex;
+    margin: 2rem 3rem;
+    flex-direction: column;
 }
 
 header {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     align-items: center;
     margin-bottom: 20px;
+    gap: 1rem;
 }
 
-.tableChartContainer,
+.tableChartContainer{
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
 .searchCreateContainer
  {
     display: flex;
@@ -110,16 +109,9 @@ input.form-control:focus {
     border: 1px solid #E6E8EC;
 }
 
-/* Table and Chart Container */
-.tableChartContainer {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-}
-
-.tableContainer {
-    width: 65%;
-}
+// .tableContainer {
+//     width: 65%;
+// }
 
 .chart-container {
     width: 30%;
@@ -205,3 +197,22 @@ td {
     font-weight: bold;
   }
   
+
+  
+.backBtn {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    color:#465671;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 1rem;
+}
+
+.backBtn:hover {
+    background-color: #f0f0f0;
+}

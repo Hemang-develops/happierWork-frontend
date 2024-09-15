@@ -1,11 +1,6 @@
-<div class="budget-container">
-    <app-sidebar></app-sidebar>
-  
-    <div class="main-content">
-      <app-topbar></app-topbar>
-  
-      <div class="content-container">
+    <div class="budget-container">
         <header class="header">
+          <button class="backBtn" [routerLink]="['/budget']" ><i class="fa-solid fa-arrow-left"></i></button>
           <h4>Ahmedabad Growth</h4>
         </header>
   
@@ -84,6 +79,4 @@
         </div>
         <app-paginator></app-paginator>
       </div>
-    </div>
-  </div>
   

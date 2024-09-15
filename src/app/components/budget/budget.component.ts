@@ -5,7 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 @Component({
   selector: 'app-budget',
   templateUrl: './budget.component.html',
-  styleUrl: './budget.component.scss'
+  styleUrl: './budget.component.scss',
 })
 
 export class BudgetComponent {
@@ -26,14 +26,11 @@ export class BudgetComponent {
 
   displayedColumns: string[] = ['designation', 'department', 'budget', 'location', 'lastUpdated', 'actions'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
-
-  pieChartLabels: string[] = ['Engineering', 'Product R&D', 'Sales', 'HR & Recruitment'];
-  pieChartData: number[] = [30, 20, 10, 40];
 }
 
 const ELEMENT_DATA = [
-  { designation: 'HR Designer', department: 'HR', budget: '₹10L', location: 'Ahmedabad', lastUpdated: ['name', 'Sep 6, 2022'] },
-  { designation: 'UI Designer', department: 'Product', budget: '₹10L', location: 'Ahmedabad', lastUpdated: ['name', 'Sep 6, 2022'] },
+  { designation: 'HR Designer', department: 'Other', budget: '₹8L', location: 'Ahmedabad', lastUpdated: ['Ankush Menta', 'Sep 6, 2022'] },
+  { designation: 'UI Designer', department: 'Product', budget: '₹10L', location: 'Ahmedabad', lastUpdated: ['Meet Mehta', 'Sep 6, 2022'] },
   { designation: 'Programmer Analyst', department: 'Engineering', budget: '₹10L', location: 'Ahmedabad', lastUpdated: ['name', 'Sep 6, 2022'] },
   { designation: 'Chief Work Officer Planning', department: 'Others', budget: '₹26L', location: 'Ahmedabad', lastUpdated: ['name', 'Sep 6, 2022'] },
   { designation: 'Vice President', department: 'Product', budget: '₹35L', location: 'Ahmedabad', lastUpdated: ['name', 'Sep 6, 2022'] },
