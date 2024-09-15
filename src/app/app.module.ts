@@ -4,41 +4,21 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { ProjectListComponent } from './components/project-list/project-list.component';
-import { BudgetComponent } from './components/budget/budget.component';
-import { PositionComponent } from './components/position/position.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatDialogModule } from '@angular/material/dialog';
-import { PlanningProjectModalComponent } from './components/planning-project-modal/planning-project-modal.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { TopbarComponent } from './components/topbar/topbar.component';
-import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSelectModule } from '@angular/material/select';
-import { PaginatorComponent } from './components/paginator/paginator.component';
-import { NgxEchartsModule } from 'ngx-echarts';
-import { DonutChartComponent } from './components/donut-chart/donut-chart.component';
-import { HighchartsChartModule } from 'highcharts-angular';
-import { PositionModalComponent } from './components/position-modal/position-modal.component';
+import { DashboardModule } from './components/dashboard/dashboard.module';
+import { BudgetModule } from './components/budget/budget.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    DashboardComponent,
-    ProjectListComponent,
-    BudgetComponent,
-    PositionComponent,
-    PlanningProjectModalComponent,
     SidebarComponent,
     TopbarComponent,
-    PaginatorComponent,
-    DonutChartComponent,
-    PositionModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,12 +27,8 @@ import { PositionModalComponent } from './components/position-modal/position-mod
     ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    MatDialogModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSelectModule,
-    NgxEchartsModule.forRoot({ echarts: () => import('echarts') }),
-    HighchartsChartModule
+    DashboardModule,
+    BudgetModule
   ],
   providers: [
     provideAnimationsAsync()
