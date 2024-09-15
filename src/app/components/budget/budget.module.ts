@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { BudgetComponent } from './budget.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PositionModalComponent } from '../position-modal/position-modal.component';
-import { HighchartsChartModule } from 'highcharts-angular';
 import { MatTableModule } from '@angular/material/table';
 import { PaginatorComponent } from '../paginator/paginator.component';
 import { DonutChartComponent } from '../donut-chart/donut-chart.component';
@@ -24,7 +23,6 @@ const routes: Routes = [
   imports: [
     CommonModule,
     MatDialogModule,
-    HighchartsChartModule,
     MatTableModule,
     FormsModule,
     ReactiveFormsModule,
