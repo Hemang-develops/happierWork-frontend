@@ -29,8 +29,31 @@
     </div>
   </div>
   <div class="budget-info">
-    <p><strong>Total budget:</strong> ₹ {{ totalBudget }} Cr</p>
-    <p><strong>Used:</strong> ₹ {{ usedAmount }} Cr</p>
-    <p><strong>Left:</strong> ₹ {{ remainingAmount }} Cr</p>
+    <div class="label-item">
+      <div class="label-text">
+        <span><strong>Total Budget</strong></span>
+      </div>
+      <div>
+        <span><strong>₹ {{ totalBudget | number: '1.2-2' }} Cr</strong></span>
+      </div>
+    </div>
+    
+    <div class="label-item">
+      <div class="label-text">
+        <span><strong>Used</strong></span>
+      </div>
+      <div>
+        <span><strong>₹ {{ usedAmount | number: '1.2-2' }} Cr</strong></span>
+      </div>
+    </div>
+    
+    <div class="label-item">
+      <div class="label-text">
+        <span><strong>Left</strong></span>
+      </div>
+      <div>
+        <span><strong>₹ {{ remainingAmount | number: '1.2-2' }} Cr</strong></span>
+      </div>
+    </div>
   </div>
 </div>

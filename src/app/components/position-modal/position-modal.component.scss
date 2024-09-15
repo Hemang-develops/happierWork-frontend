@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+html, body {
+    font-family: "Montserrat", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1,h2,h3,h4,h5,h6{
+    margin: 0;
+}
+
+/* Center the modal with a fixed height and width */
+.modal-content {
+    padding: 2rem;
+    background-color: white;
+    border-radius: 16px; /* Make the corners rounded */
+    width: 500px;
+    max-width: 100%;
+    margin: 0 auto;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Add subtle shadow for depth */
+}
+
+h3 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #434343;
+    margin-bottom: 1rem;
+}
+
+hr.separator {
+    margin: 1rem 0;
+    border: 1px solid #DEE1E6
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-label {
+    font-weight: 600;
+    color: #434343;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+input.form-control {
+    width: 95%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    border-radius: 8px;
+    transition: border-color 0.3s;
+}
+
+input.form-control:focus {
+    border-color: #FFB414; /* Highlight input on focus */
+    outline: none;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .input-container:nth-last-child(n+2) {
+    margin-bottom: 2rem;
+  }
+
+.invalid-feedback {
+    color: red;
+    font-size: 12px;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
+}
+
+.submitbutton {
+    background-color: #FFB414;
+    color: #000000;
+    border: none;
+    border-radius: 40px; /* Rounded button */
+    cursor: pointer;
+    padding: 0.5rem 1.5rem;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.submitbutton:hover {
+    background-color: #e69d09; /* Darker shade on hover */
+}
+
+.submitbutton:disabled {
+    background-color: gray;
+    cursor: not-allowed;
+}
+
+.red {
+    color: red;
+}
+
+/* Close Button Styling */
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.closeBtn {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.closeBtn:hover {
+    background-color: #f0f0f0;
+}
+
+/* Modal container style for centering */
+/* Modal Overlay - this centers the modal and adds a backdrop */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5); /* semi-transparent black overlay */
+    z-index: 1000;
+}

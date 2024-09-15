@@ -66,18 +66,21 @@ header {
 }
 
 input.form-control {
-    padding: 0.75rem;
     border: 1px solid #E6E8EC;
     font-size: 14px;
-    width: 18rem;
     border-radius: 2px;
     margin-right: 1rem;
     transition: border-color 0.3s;
 }
 
-input.form-control::placeholder {
+.search{
+    padding: 0.75rem;
+    width: 18rem;
+}
+
+input.form-control, .search::placeholder {
     color: #C1C7D0;
-    padding: 1.5rem;
+    padding-left: 1rem;
 }
 
 input.form-control:focus {
@@ -117,13 +120,11 @@ input.form-control:focus {
     width: 30%;
     background-color: #fff;
     padding: 20px;
-    // box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
 }
 
 .budget-header {
     font-size: 1.2rem;
-    margin-bottom: 1rem;
 }
 
 .edit-link {
@@ -216,4 +217,31 @@ td {
 
 .backBtn:hover {
     background-color: #f0f0f0;
+}
+
+.budgetEdit{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+.input-container, .budget{
+    display: flex;
+}
+.form-control, .budget{
+    margin-left: 0.5rem;
+}
+
+.input{
+    display: flex;
+    align-items: center;
+}
+
+.enterBudget{
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.lastUpdated{
+    display: flex;
+    flex-direction: column;
 }

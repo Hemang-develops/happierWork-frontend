@@ -9,10 +9,9 @@ import { NavigationEnd, Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   title = 'Happier Work';
-  msg:any;
   showBars = true;
 
-  constructor(private router: Router, private pService : PublicService) {
+  constructor(private router: Router) {
     // Listen for route changes
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
@@ -23,14 +22,5 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.showMsg();
-  }
-
-  showMsg(){
-    this.pService.getMessage().subscribe(data =>{
-      this.msg = data;
-      console.log(this.msg);
-      
-    });
   }
 }

@@ -23,6 +23,7 @@ import { PaginatorComponent } from './components/paginator/paginator.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { DonutChartComponent } from './components/donut-chart/donut-chart.component';
 import { HighchartsChartModule } from 'highcharts-angular';
+import { PositionModalComponent } from './components/position-modal/position-modal.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
     TopbarComponent,
     PaginatorComponent,
     DonutChartComponent,
+    PositionModalComponent,
   ],
   imports: [
     BrowserModule,

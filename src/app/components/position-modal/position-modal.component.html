@@ -1,0 +1,53 @@
+<!-- <div class="modal-overlay" *ngIf="isModalOpen"> -->
+    <div class="modal-overlay">
+        <div class="modal-content">
+           <div class="header">
+              <h3>Create Planning Project</h3>
+              <div>
+                 <button class="closeBtn" (click)="onModalClose()">X</button>
+              </div>
+           </div>
+           <hr class="separator">
+           <div>
+              <form class="formGroup" [formGroup]="positionForm" (ngSubmit)="onSubmit()">
+                <div class="input-container">
+                   <label for="designation" class="form-label">Designation<span class="red">*</span></label>
+                   <input class="form-control" placeholder="Enter budget in INR" formControlName="designation" required>
+                   <div *ngIf="f.designation.touched && f.designation.errors">
+                     <small class="red">Designation is required</small>
+                   </div>
+                </div>
+      
+                <div class="input-container">
+                   <label for="department" class="form-label">Department <span class="red">*</span></label>
+                   <input class="form-control" placeholder="Enter description" formControlName="department" required>
+                   <div *ngIf="f.department.touched && f.department.errors">
+                     <small class="red">Department is required</small>
+                   </div>
+                </div>
+      
+                <div class="input-container">
+                  <label for="budget" class="form-label">Budget <span class="red">*</span></label>
+                  <input class="form-control" placeholder="Enter description" formControlName="budget" required>
+                  <div *ngIf="f.budget.touched && f.budget.errors">
+                    <small class="red">Budget is required</small>
+                  </div>
+               </div>
+               
+               <div class="input-container">
+                  <label for="location" class="form-label">Location <span class="red">*</span></label>
+                  <input class="form-control" placeholder="Enter description" formControlName="location" value="Ahmedabad" required>
+                  <div *ngIf="f.location.touched && f.location.errors">
+                    <small class="red">Location is required</small>
+                  </div>
+               </div>
+                 <hr class="separator">
+      
+                 <div class="btn-container">
+                    <button type="submit" class="submitbutton" [disabled]="positionForm.invalid"><strong>Create</strong></button>
+                 </div>
+              </form>
+           </div>
+        </div>
+      </div>
+      
