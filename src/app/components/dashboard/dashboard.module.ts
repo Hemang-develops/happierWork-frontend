@@ -5,6 +5,11 @@ import { PlanningProjectModalComponent } from '../planning-project-modal/plannin
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProjectListComponent } from '../project-list/project-list.component';
+import { Routes } from '@angular/router';
+
+const routes: Routes = [
+  { path: '', component: DashboardComponent } // Default route for the Dashboard
+];
 
 @NgModule({
   declarations: [

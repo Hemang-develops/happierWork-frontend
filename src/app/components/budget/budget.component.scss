@@ -78,7 +78,8 @@ input.form-control {
     width: 18rem;
 }
 
-input.form-control, .search::placeholder {
+// input.form-control
+.search::placeholder {
     color: #C1C7D0;
     padding-left: 1rem;
 }
@@ -94,9 +95,8 @@ input.form-control:focus {
     align-items: center;
 }
 
-.form-control {
+.form-control .search {
     padding-left: 2.5rem;
-    /* Adjust the padding to make space for the icon */
 }
 
 .search-icon {
@@ -227,12 +227,10 @@ td {
 .input-container, .budget{
     display: flex;
 }
-.form-control, .budget{
-    margin-left: 0.5rem;
-}
 
 .input{
     display: flex;
+    gap:1rem;
     align-items: center;
 }
 
