@@ -22,10 +22,14 @@
     "@angular/router": "^18.2.0",
     "@fortawesome/angular-fontawesome": "^0.15.0",
     "@fortawesome/fontawesome-free": "^6.6.0",
+    "bootstrap": "^5.3.3",
     "chart.js": "^4.4.4",
+    "echarts": "^5.5.1",
     "fontawesome": "^5.6.3",
+    "highcharts": "^11.4.8",
+    "highcharts-angular": "^4.0.1",
     "ng2-charts": "^6.0.1",
-    "package.json": "^2.0.1",
+    "ngx-echarts": "^18.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.7.0",
     "zone.js": "~0.14.10"
@@ -41,6 +45,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "typescript": "~5.5.2"
+    "typescript": "~5.5.2",
+    "webpack-bundle-analyzer": "^4.10.2"
   }
 }

@@ -20,6 +20,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { PaginatorComponent } from './components/paginator/paginator.component';
+import { NgxEchartsModule } from 'ngx-echarts';
+import { DonutChartComponent } from './components/donut-chart/donut-chart.component';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,8 @@ import { PaginatorComponent } from './components/paginator/paginator.component';
     PlanningProjectModalComponent,
     SidebarComponent,
     TopbarComponent,
-    PaginatorComponent
+    PaginatorComponent,
+    DonutChartComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,7 +48,9 @@ import { PaginatorComponent } from './components/paginator/paginator.component';
     MatDialogModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSelectModule
+    MatSelectModule,
+    NgxEchartsModule.forRoot({ echarts: () => import('echarts') }),
+    HighchartsChartModule
   ],
   providers: [
     provideAnimationsAsync()

@@ -79,14 +79,7 @@
           <!-- Chart Section -->
           <div class="chart-container">
             <h5 class="budget-header">Budget <span class="edit-link">Edit</span></h5>
-            <!-- <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="'pie'">
-            </canvas> -->
-  
-            <div class="summary">
-              <p>Total budget: ₹2 Cr</p>
-              <p>Used: ₹1.5 Cr</p>
-              <p>Left: ₹50 L</p>
-            </div>
+            <app-donut-chart></app-donut-chart>
           </div>
         </div>
         <app-paginator></app-paginator>

@@ -34,7 +34,7 @@
         <div class="input-container">
             <label for="email" class="form-label">Email ID</label>
             <input id="email" type="email" formControlName="email" class="form-control"
-                placeholder="Enter your email ID" [ngClass]="{ 'is-invalid': f.email.errors }" />
+                placeholder="Enter your email ID" [ngClass]="{ 'is-invalid': f.email.touched && f.email.errors }" />
             <div *ngIf="f.email.touched && f.email.errors" class="invalid-feedback">
                 <small *ngIf="f.email.errors.required">Email is required</small>
                 <small *ngIf="f.email.errors.email">Email is not valid</small>
@@ -43,7 +43,7 @@
         <div class="input-container">
             <label for="password" class="form-label">Password</label>
             <input id="password" type="password" placeholder="Enter your password" formControlName="password"
-                class="form-control" [ngClass]="{ 'is-invalid': f.password.errors }" />
+                class="form-control" [ngClass]="{ 'is-invalid':f.password.touched && f.password.errors }" />
             <div *ngIf="f.password.touched && f.password.errors" class="invalid-feedback">
                 <small *ngIf="f.password.errors.required">Password is required</small>
                 <small *ngIf="f.password.errors.minLength">Password must be at least 8 characters</small>

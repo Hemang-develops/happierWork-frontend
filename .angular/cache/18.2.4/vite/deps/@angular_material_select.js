@@ -15,16 +15,17 @@ import {
   MatSelectTrigger,
   MatSuffix,
   matSelectAnimations
-} from "./chunk-3YN2ZMQZ.js";
-import "./chunk-R37R45MQ.js";
-import "./chunk-SCTBEXKN.js";
-import "./chunk-6JCBP77D.js";
+} from "./chunk-G4AEDWKS.js";
+import "./chunk-SI4DMHY3.js";
+import "./chunk-Z3X7D36Y.js";
+import "./chunk-2QM32APY.js";
 import {
   MatOptgroup,
   MatOption
-} from "./chunk-GM3A77DT.js";
-import "./chunk-UA7S4TOK.js";
-import "./chunk-2AG3LJSD.js";
+} from "./chunk-KM5AOAXO.js";
+import "./chunk-62FSIPVM.js";
+import "./chunk-YSU4MBFF.js";
+import "./chunk-CX3I3NQG.js";
 export {
   MAT_SELECT_CONFIG,
   MAT_SELECT_SCROLL_STRATEGY,

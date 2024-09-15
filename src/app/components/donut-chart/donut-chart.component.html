@@ -1,0 +1,36 @@
+<div>
+  <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions"
+    style="width: 100%; height: 100%; display: block;">
+  </highcharts-chart>
+  <div class="custom-labels">
+    <div class="label-item">
+      <div class="label-text"><span class="label-color" style="background-color: #7AC2B3"></span>
+        <span><strong>Engineering</strong></span>
+      </div>
+      <div><span><strong> 30%</strong></span></div>
+    </div>
+    <div class="label-item">
+      <div class="label-text"><span class="label-color" style="background-color: #A4D1A5"></span>
+        <span><strong>Product</strong></span>
+      </div>
+      <div><span><strong> 20%</strong></span></div>
+    </div>
+    <div class="label-item">
+      <div class="label-text"><span class="label-color" style="background-color: #F4C575"></span>
+        <span><strong>Sales</strong> </span>
+      </div>
+      <div> <span><strong> 30%</strong></span></div>
+    </div>
+    <div class="label-item">
+      <div class="label-text"><span class="label-color" style="background-color: #C1DAD6"></span>
+        <span><strong>Others</strong></span>
+      </div>
+      <div><span><strong> 10%</strong></span></div>
+    </div>
+  </div>
+  <div class="budget-info">
+    <p><strong>Total budget:</strong> ₹ {{ totalBudget }} Cr</p>
+    <p><strong>Used:</strong> ₹ {{ usedAmount }} Cr</p>
+    <p><strong>Left:</strong> ₹ {{ remainingAmount }} Cr</p>
+  </div>
+</div>

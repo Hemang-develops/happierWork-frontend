@@ -1,0 +1,30 @@
+.custom-labels {
+    margin-top: 10px;
+    font-size: 14px;
+    width: 100%; /* Adjust width based on container */
+  }
+  
+  .label-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .label-color {
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    margin-right: 8px;
+    border-radius: 50%;
+  }
+  
+  .budget-info {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #333;
+  }
+  
+.label-text{
+    display: flex;
+    justify-content: space-between;
+}
