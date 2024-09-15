@@ -11,4 +11,9 @@ export class PublicService {
   getMessage(){
     return this.http.get(this.apiURL);
   }
+
+  getTableData(){
+    // data/tabledata
+    return this.http.get(this.apiURL+'data/tabledata');
+  }
 }

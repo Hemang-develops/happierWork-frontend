@@ -1,15 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
+import { PublicService } from '../../services/public.service';
 
 @Component({
   selector: 'app-budget',
   templateUrl: './budget.component.html',
-  styleUrl: './budget.component.scss',
+  styleUrls: ['./budget.component.scss'],  // Corrected from 'styleUrl' to 'styleUrls'
 })
 
-export class BudgetComponent {
-  dropdown !: FormGroup;
+export class BudgetComponent implements OnInit {
+  dropdown!: FormGroup;
   dropdownOptions = [
     ['designation', 'Designation'],
     ['department', 'Department'],
@@ -17,24 +18,38 @@ export class BudgetComponent {
     ['location', 'Location'],
     ['lastUpdated', 'Last Updated']
   ];
+  tableData: any = [];
+  paginatedData: any = [];
+  dataSource = new MatTableDataSource<any>(this.tableData);
 
-  constructor(private fb: FormBuilder) {
+  displayedColumns: string[] = ['designation', 'department', 'budget', 'location', 'lastUpdated', 'actions'];
+  pageSize = 10;
+  currentPage = 1;
+
+  constructor(private fb: FormBuilder, private service: PublicService) {
+    // Initialize the form with 'designation' as the default selected option
     this.dropdown = this.fb.group({
       selectedOption: ['designation']
     });
   }
 
-  displayedColumns: string[] = ['designation', 'department', 'budget', 'location', 'lastUpdated', 'actions'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
-}
+  ngOnInit(): void {
+    this.service.getTableData().subscribe(result => {
+      this.tableData = result;
+      this.updateTableData();
+      console.log(this.tableData, 'data');
+    });
+  }
 
-const ELEMENT_DATA = [
-  { designation: 'HR Designer', department: 'Other', budget: '₹8L', location: 'Ahmedabad', lastUpdated: ['Ankush Menta', 'Sep 6, 2022'] },
-  { designation: 'UI Designer', department: 'Product', budget: '₹10L', location: 'Ahmedabad', lastUpdated: ['Meet Mehta', 'Sep 6, 2022'] },
-  { designation: 'Programmer Analyst', department: 'Engineering', budget: '₹10L', location: 'Ahmedabad', lastUpdated: ['name', 'Sep 6, 2022'] },
-  { designation: 'Chief Work Officer Planning', department: 'Others', budget: '₹26L', location: 'Ahmedabad', lastUpdated: ['name', 'Sep 6, 2022'] },
-  { designation: 'Vice President', department: 'Product', budget: '₹35L', location: 'Ahmedabad', lastUpdated: ['name', 'Sep 6, 2022'] },
-  { designation: 'Chief Marketing Officer', department: 'Product', budget: '₹21L', location: 'Ahmedabad', lastUpdated: ['name', 'Sep 6, 2022'] },
-  { designation: 'Program Manager', department: 'Product', budget: '₹35L', location: 'Ahmedabad', lastUpdated: ['name', 'Sep 6, 2022'] },
-  // Add more data as needed
-];
+  updateTableData(): void {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.paginatedData = this.tableData.slice(startIndex, endIndex);
+    this.dataSource.data = this.paginatedData;
+  }
+
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.updateTableData();
+  }
+}
