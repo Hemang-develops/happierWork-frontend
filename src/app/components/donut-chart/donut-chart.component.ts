@@ -49,7 +49,7 @@ export class DonutChartComponent implements AfterViewInit, OnChanges {
         labels: false
       },
       donut: {
-        title: `${this.usedAmount} Cr used`,
+        title: `${(this.usedAmount/100000000).toFixed(2)} Cr used`,
         width: 20,
         label: {
           show: false

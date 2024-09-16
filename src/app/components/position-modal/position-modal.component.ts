@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -11,6 +11,7 @@ import { PublicService } from '../../services/public.service';
 })
 export class PositionModalComponent {
   positionForm !: FormGroup;
+  highlightedElementID: string | null = null;
   dropdownOptions = [
     ['Engineering', 'Engineering'],
     ['HR', 'HR'],
@@ -33,8 +34,34 @@ export class PositionModalComponent {
     });
   }
 
+  
+  @HostListener('click', ['$event'])
+  onClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    const id = target.id;
+    const activeElements = document.querySelectorAll('.activeElement');
+    activeElements.forEach(element => element.classList.remove('activeElement'));
 
-  ngOnInit(): void {
+    if (id) {
+      target.classList.add('activeElement');
+      this.sendElementId(id);
+    }
+  }
+
+
+  highlightElement(elementID: string | null) {
+    
+    document.querySelectorAll('.activeElement').forEach(el => el.classList.remove('activeElement'));
+    if (elementID) {
+      const element = document.getElementById(elementID);
+      if (element) {
+        element.classList.add('activeElement');
+      }
+    }
+  }
+
+  sendElementId(id: string) {
+    this.publicService.sendUpdate(['tracking', id]);
   }
 
   onModalClose(): void {

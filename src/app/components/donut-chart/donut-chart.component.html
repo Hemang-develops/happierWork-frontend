@@ -16,7 +16,7 @@
         <span><strong>Total Budget</strong></span>
       </div>
       <div>
-        <span><strong>₹ {{ totalBudget | number: '1.2-2' }} Cr</strong></span>
+        <span><strong>₹ {{ (totalBudget/100000000) | number: '1.2-2' }} Cr</strong></span>
       </div>
     </div>
 
@@ -25,7 +25,7 @@
         <span><strong>Used</strong></span>
       </div>
       <div>
-        <span><strong>₹ {{ usedAmount | number: '1.2-2' }} Cr</strong></span>
+        <span><strong>₹ {{ (usedAmount/100000000) | number: '1.2-2' }} Cr</strong></span>
       </div>
     </div>
 
@@ -34,7 +34,7 @@
         <span><strong>Left</strong></span>
       </div>
       <div>
-        <span><strong>₹ {{ remainingAmount | number: '1.2-2' }} Cr</strong></span>
+        <span><strong>₹ {{ (remainingAmount/100000000) | number: '1.2-2' }} Cr</strong></span>
       </div>
     </div>
   </div>

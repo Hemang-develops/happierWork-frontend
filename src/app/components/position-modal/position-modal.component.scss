@@ -50,14 +50,12 @@ hr.separator {
 input.form-control {
     width: 95%;
     padding: 0.75rem;
-    border: 1px solid #ddd;
     font-size: 14px;
     border-radius: 8px;
     transition: border-color 0.3s;
 }
 
 input.form-control:focus {
-    border-color: #FFB414; /* Highlight input on focus */
     outline: none;
 }
 
@@ -140,4 +138,16 @@ input.form-control:focus {
     align-items: center;
     background-color: rgba(0, 0, 0, 0.5); /* semi-transparent black overlay */
     z-index: 1000;
+}
+
+
+.activeElement {
+    border: 2px solid blue; /* Example style */
+    transition: border-color 0.3s;
+  }
+
+  input.form-control:focus {
+    // border-color: #FFB414;
+    outline: none;
+    box-shadow: none;
 }
