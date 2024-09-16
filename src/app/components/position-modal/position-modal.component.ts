@@ -12,11 +12,11 @@ import { PublicService } from '../../services/public.service';
 export class PositionModalComponent {
   positionForm !: FormGroup;
   dropdownOptions = [
-    ['engineering', 'Engineering'],
-    ['hr', 'HR'],
-    ['sales', 'Sales'],
-    ['product', 'Product'],
-    ['other', 'Other']
+    ['Engineering', 'Engineering'],
+    ['HR', 'HR'],
+    ['Sales', 'Sales'],
+    ['Product', 'Product'],
+    ['Other', 'Other']
   ];
 
   constructor(
@@ -48,13 +48,10 @@ export class PositionModalComponent {
 
   onSubmit(){
     if(this.positionForm.valid){
-      console.log('Form value:', this.positionForm.value);
-        this.publicService.addTableData(this.positionForm.value).subscribe(() => {
-        this.publicService.sendUpdate(this.positionForm.value);
-        });
+      const formdata = Object.values(this.positionForm.value);
+      this.publicService.sendUpdate(["add", ...formdata]);
     }
     this.onModalClose()
     this.router.navigate(['/dashboard']);
   }
-
 }

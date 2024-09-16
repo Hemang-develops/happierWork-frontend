@@ -88,6 +88,7 @@ export class PublicService {
   }
 
   sendUpdate(updatedData: any): void {
+    console.log(updatedData)
     this.socket$.next(JSON.stringify(updatedData));
   }
 
