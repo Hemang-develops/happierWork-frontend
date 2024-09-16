@@ -1,5 +1,5 @@
 // public.service.ts
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TableData } from '../interface';
 import { WebSocketSubject } from 'rxjs/webSocket';
@@ -40,11 +40,7 @@ export class PublicService {
       }
     );
   }
-
-  getTableData(): Observable<TableData[]> {
-    return this.http.get<TableData[]>(this.apiURL + 'tabledata');
-  }
-
+  
   getRealTimeData(): Observable<TableData[]> {
     return this.dataSubject.asObservable();
   }
@@ -53,7 +49,24 @@ export class PublicService {
     this.socket$.next(JSON.stringify(updatedData));
   }
 
-  deletePosition(positionId: string) {
-    return this.http.delete(`${this.apiURL}delete/position/${positionId}`);
+  getTableData(): Observable<TableData[]> {
+    return this.http.get<TableData[]>(`${this.apiURL}data`);
   }
+
+  addTableData(newEntry: any): Observable<any> {
+    return this.http.post<any>(`${this.apiURL}data/add/`, newEntry, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    });
+  }
+
+  updateTableData(entryId: string, updatedEntry: any): Observable<any> {
+    return this.http.put<any>(`${this.apiURL}data/update/${entryId}/`, updatedEntry, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    });
+  }
+
+  deleteTableData(entryId: string): Observable<any> {
+    return this.http.delete<any>(`${this.apiURL}data/delete/${entryId}/`);
+  }
+
 }

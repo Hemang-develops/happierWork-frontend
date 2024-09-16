@@ -35,7 +35,6 @@ export class BudgetComponent implements OnInit {
   editBudget:boolean = false;
 
   constructor(private fb: FormBuilder, private publicService: PublicService,private webSocketService: WebSocketService, private planningProjectModal: MatDialog) {
-    // Initialize the form with 'designation' as the default selected option
     this.dropdown = this.fb.group({
       selectedOption: ['designation']
     });
@@ -110,19 +109,12 @@ export class BudgetComponent implements OnInit {
       width: '720px',
     });
   }
-
+  
   deletePosition(id:string){
     this.tableData = this.tableData.filter(rows => rows.id !== id);    
     this.updateTableData();
     this.aggregateBudgetData();
     this.publicService.sendUpdate(["delete", id]);
-    // this.publicService.deletePosition(id).subscribe(
-    //   (response) => {
-    //     console.log('Position deleted successfully:', response);
-    //   },
-    //   (error) => {
-    //     console.error('Error deleting position:', error);
-    //   }
-    // );
+    this.publicService.deleteTableData
   }
 }

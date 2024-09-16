@@ -17,13 +17,17 @@
                      <small class="red">Designation is required</small>
                    </div>
                 </div>
-      
+
                 <div class="input-container">
-                   <label for="department" class="form-label">Department <span class="red">*</span></label>
-                   <input class="form-control" placeholder="Enter description" formControlName="department" required>
-                   <div *ngIf="f.department.touched && f.department.errors">
-                     <small class="red">Department is required</small>
-                   </div>
+                  <label for="department" class="form-label">Department <span class="red">*</span></label>
+                  <select formControlName="department" class="form-control">
+                    <option *ngFor="let option of dropdownOptions" [value]="option[0]">
+                      {{ option[1] }}
+                    </option>
+                  </select>
+                  <div *ngIf="f.department.touched && f.department.errors">
+                    <small class="red">Department is required</small>
+                  </div>
                 </div>
       
                 <div class="input-container">
