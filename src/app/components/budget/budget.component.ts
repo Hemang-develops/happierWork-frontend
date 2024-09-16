@@ -5,6 +5,7 @@ import { PublicService } from '../../services/public.service';
 import { TableData } from '../../interface';
 import { PositionModalComponent } from '../position-modal/position-modal.component';
 import { MatDialog } from '@angular/material/dialog';
+import { WebSocketService } from '../../services/websocket.service';
 
 @Component({
   selector: 'app-budget',
@@ -33,7 +34,7 @@ export class BudgetComponent implements OnInit {
   remainingAmount: number = 0;
   editBudget:boolean = false;
 
-  constructor(private fb: FormBuilder, private service: PublicService, public planningProjectModal: MatDialog) {
+  constructor(private fb: FormBuilder, private publicService: PublicService,private webSocketService: WebSocketService, private planningProjectModal: MatDialog) {
     // Initialize the form with 'designation' as the default selected option
     this.dropdown = this.fb.group({
       selectedOption: ['designation']
@@ -41,13 +42,24 @@ export class BudgetComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.service.getTableData().subscribe((result: TableData[]) => {
+    this.publicService.getTableData().subscribe((result: TableData[]) => {
       this.tableData = result;
       this.updateTableData();
       this.aggregateBudgetData();
       this.updateBudget(this.chartData);
     });
+    
+    this.publicService.getRealTimeData().subscribe((realTimeData) => {
+      this.tableData = realTimeData;
+      this.updateTableData();
+      this.aggregateBudgetData();
+      this.updateBudget(this.chartData);
+    });
   }
+  
+  // sendUpdateToWebSocket(): void {
+  //   this.publicService.sendUpdate(this.tableData);
+  // }
 
   updateTableData(): void {
     const startIndex = (this.currentPage - 1) * this.pageSize;
@@ -97,5 +109,20 @@ export class BudgetComponent implements OnInit {
     this.planningProjectModal.open(PositionModalComponent, {
       width: '720px',
     });
+  }
+
+  deletePosition(id:string){
+    this.tableData = this.tableData.filter(rows => rows.id !== id);    
+    this.updateTableData();
+    this.aggregateBudgetData();
+    this.publicService.sendUpdate(["delete", id]);
+    // this.publicService.deletePosition(id).subscribe(
+    //   (response) => {
+    //     console.log('Position deleted successfully:', response);
+    //   },
+    //   (error) => {
+    //     console.error('Error deleting position:', error);
+    //   }
+    // );
   }
 }

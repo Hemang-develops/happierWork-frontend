@@ -7,14 +7,14 @@
                 <div class="projects" *ngFor="let project of projects">
                     <div class="top part">
                         <p class="title"><strong>Project: {{project.name}}</strong></p>
-                        <small class="subtitle">Project: {{project.name}}</small>
+                        <small class="subtitle">Planning for {{project.name}}</small>
                     </div>
                     <div class="bottom part">
                         <small><strong>Budget</strong></small>
-                        <small class="subtitle">{{project.totalBudget | currency}}</small>
+                        <small class="subtitle">{{project.totalBudget}} Cr</small>
                         <br>
                         <small><strong>Total No. of Positions</strong></small>
-                        <small class="subtitle">{{project.collaboratorEmail}}</small>
+                        <small class="subtitle">{{project.totalPositions}}</small>
                         <br>
                         <small><strong>Co-planers</strong></small>
                         <small class="subtitle">{{project.collaboratorEmail}}</small>

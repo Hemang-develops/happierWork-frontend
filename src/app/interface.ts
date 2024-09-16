@@ -4,10 +4,10 @@ export interface TableData {
     department: string;
     budget: number;
     location: string;
-    lastUpdated: lastUpdated;
+    lastUpdated?: lastUpdated;
   }
   
   interface lastUpdated{
     name: string;
-    date: Date;
+    date?: Date;
   }

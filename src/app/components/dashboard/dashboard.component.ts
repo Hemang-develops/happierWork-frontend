@@ -14,23 +14,26 @@ export class DashboardComponent {
 
   projects = [{
     id: 1,
-    name: 'Project 1',
-    collaboratorEmail: 'demo@mail.com',
-    totalBudget: 1000,
+    name: 'Asia Expansion',
+    collaboratorEmail: 'Yash Menta',
+    totalBudget: 1.5,
+    totalPositions: 66,
     remainingBudget: 200,
     utilizedBudget: 800
   },{
     id: 2,
-    name: 'Project 1',
-    collaboratorEmail: 'demo@mail.com',
-    totalBudget: 1000,
+    name: 'Austrailia Expansion',
+    collaboratorEmail: 'Yash Menta',
+    totalBudget: 1.5,
+    totalPositions: 66,
     remainingBudget: 200,
     utilizedBudget: 800
   },{
     id: 3,
-    name: 'Project 1',
-    collaboratorEmail: 'demo@mail.com',
-    totalBudget: 1000,
+    name: 'Growth 2024',
+    collaboratorEmail: 'Yash Menta',
+    totalBudget: 1.5,
+    totalPositions: 66,
     remainingBudget: 200,
     utilizedBudget: 800
   }]
