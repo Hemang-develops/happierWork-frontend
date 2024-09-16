@@ -72,7 +72,7 @@
       <div class="budgetEdit">
         <div class="input">
           <h5 class="budget-header">Budget <span class="edit-link" *ngIf="!editBudget"
-              (click)="toggleEditBudget()">Edit</span></h5>
+              (click)="toggleEditBudget()" id="editBudget">Edit</span></h5>
           <div class="input-container budget" *ngIf="editBudget">
             <input id="budgetInput" class="form-control budget" [(ngModel)]="totalBudget"
               placeholder="Enter Budget in CR" />
