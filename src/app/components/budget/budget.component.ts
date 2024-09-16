@@ -124,7 +124,6 @@ export class BudgetComponent implements OnInit {
   
   updateBudget(data: any[]) {
     this.usedAmount = data.reduce((sum, item) => sum + item.y, 0) / 100;
-    // this.totalBudget = this.totalBudget / 100;
     this.remainingAmount = this.totalBudget - this.usedAmount;
 }
 

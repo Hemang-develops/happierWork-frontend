@@ -4,7 +4,7 @@
            <div class="header">
               <h3>Create Planning Project</h3>
               <div>
-                 <button class="closeBtn" (click)="onModalClose()">X</button>
+                 <button id="closeBtn" class="closeBtn" (click)="onModalClose()">X</button>
               </div>
            </div>
            <hr class="separator">
@@ -12,7 +12,7 @@
               <form class="formGroup" [formGroup]="positionForm" (ngSubmit)="onSubmit()">
                 <div class="input-container">
                    <label for="designation" class="form-label">Designation<span class="red">*</span></label>
-                   <input class="form-control" placeholder="Enter designation" formControlName="designation" required>
+                   <input id="designation" class="form-control" placeholder="Enter designation" formControlName="designation" required>
                    <div *ngIf="f.designation.touched && f.designation.errors">
                      <small class="red">Designation is required</small>
                    </div>
@@ -20,7 +20,7 @@
 
                 <div class="input-container">
                   <label for="department" class="form-label">Department <span class="red">*</span></label>
-                  <select formControlName="department" class="form-control">
+                  <select id="department" formControlName="department" class="form-control">
                     <option *ngFor="let option of dropdownOptions" [value]="option[0]">
                       {{ option[1] }}
                     </option>
@@ -32,7 +32,7 @@
       
                 <div class="input-container">
                   <label for="budget" class="form-label">Budget <span class="red">*</span></label>
-                  <input class="form-control" placeholder="Enter Budget in INR" formControlName="budget" required>
+                  <input id="budget" class="form-control" placeholder="Enter Budget in INR" formControlName="budget" required>
                   <div *ngIf="f.budget.touched && f.budget.errors">
                     <small class="red">Budget is required</small>
                   </div>
@@ -40,7 +40,7 @@
                
                <div class="input-container">
                   <label for="location" class="form-label">Location <span class="red">*</span></label>
-                  <input class="form-control" placeholder="Enter Location" formControlName="location" value="Ahmedabad" required>
+                  <input id="location" class="form-control" placeholder="Enter Location" formControlName="location" value="Ahmedabad" required>
                   <div *ngIf="f.location.touched && f.location.errors">
                     <small class="red">Location is required</small>
                   </div>
