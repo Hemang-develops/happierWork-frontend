@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { PublicService } from '../../services/public.service';
 
 
 @Component({
@@ -11,7 +12,9 @@ import { Router } from '@angular/router';
 
 export class LoginComponent implements OnInit{
   loginForm !:FormGroup;
-  constructor (private router : Router, private fb: FormBuilder){
+  errorMessage: string | null = null;
+
+  constructor (private router : Router, private fb: FormBuilder, private publicService: PublicService){
       this.loginForm = this.fb.group({
         email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required, Validators.minLength(8)]]
@@ -21,13 +24,25 @@ export class LoginComponent implements OnInit{
   ngOnInit(): void {
   }
 
-  // Method to handle form submission
   onSubmit() {
-    if(this.loginForm.valid){
-      console.log('Form value:', this.loginForm.value);
+    if (this.loginForm.valid) {
+      const { email, password } = this.loginForm.value;
       this.router.navigate(['/budget']);
+      this.userLoggedIn();
+      this.publicService.login(email, password)
     }
-    // Add logic to handle the login action, e.g., call an authentication service
+  }
+
+  extractUsername(): string {
+    const localPart = this.loginForm.value.email.split('@')[0];
+    const nameParts = localPart.replace(/\./g, ' ').split(' ');
+    return nameParts[0] || localPart;
+  }
+  
+  userLoggedIn() {
+    let userID = this.extractUsername()
+    console.log(userID)
+    this.publicService.sendLoginStatus('login', userID);
   }
 
   get f(){

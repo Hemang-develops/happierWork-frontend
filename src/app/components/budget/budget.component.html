@@ -1,6 +1,6 @@
 <div class="budget-container">
   <header class="header">
-    <button class="backBtn" [routerLink]="['/budget']"><i class="fa-solid fa-arrow-left"></i></button>
+    <button id="backBtn" class="backBtn" [routerLink]="['/budget']"><i class="fa-solid fa-arrow-left"></i></button>
     <h4>Ahmedabad Growth</h4>
   </header>
 
@@ -8,47 +8,42 @@
     <div class="searchContainer">
       <div class="input-container">
         <i class="fa-solid fa-magnifying-glass search-icon"></i>
-        <input class="form-control search" placeholder="Search by name" />
+        <input id="searchInput" class="form-control search" placeholder="Search by name" />
       </div>
-      <select name="searchDropdown" class="searchDropdown">
+      <select id="searchDropdown" name="searchDropdown" class="searchDropdown">
         <option *ngFor="let option of dropdownOptions" [value]="option[0]">
           {{ option[1] }}
         </option>
       </select>
     </div>
-    <button mat-raised-button class="createBtn" (click)="openPlanningProjectModal()">+ Create Position</button>
+    <button id="createPositionBtn" mat-raised-button class="createBtn" (click)="openPlanningProjectModal()">+ Create
+      Position</button>
   </div>
 
   <div class="tableChartContainer">
-    <!-- Table Section -->
     <div class="tableContainer">
       <table mat-table [dataSource]="dataSource" class="mat-border">
 
-        <!-- Designation Column -->
         <ng-container matColumnDef="designation">
           <th mat-header-cell *matHeaderCellDef> Designation </th>
           <td mat-cell *matCellDef="let element"> {{element.designation}} </td>
         </ng-container>
 
-        <!-- Department Column -->
         <ng-container matColumnDef="department">
           <th mat-header-cell *matHeaderCellDef> Department </th>
           <td mat-cell *matCellDef="let element"> {{element.department}} </td>
         </ng-container>
 
-        <!-- Budget Column -->
         <ng-container matColumnDef="budget">
           <th mat-header-cell *matHeaderCellDef> Budget </th>
           <td mat-cell *matCellDef="let element"> ₹{{element.budget}}L </td>
         </ng-container>
 
-        <!-- Location Column -->
         <ng-container matColumnDef="location">
           <th mat-header-cell *matHeaderCellDef> Location </th>
           <td mat-cell *matCellDef="let element"> {{element.location}} </td>
         </ng-container>
 
-        <!-- Last Updated Column --> 
         <ng-container matColumnDef="lastUpdated">
           <th mat-header-cell *matHeaderCellDef> Last Updated </th>
           <td mat-cell *matCellDef="let element">
@@ -61,30 +56,31 @@
 
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef> </th>
-          <td mat-cell *matCellDef="let element">
+          <td mat-cell *matCellDef="let element" id="deleteIcon">
             <i class="fa-solid fa-trash-can" (click)="deletePosition(element.id)"></i>
           </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" [id]="'row-' + row.id"></tr>
       </table>
-      <app-paginator [length]="tableData.length" [pageSize]="pageSize"
-        (pageChange)="onPageChange($event)"></app-paginator>
+      <app-paginator [length]="tableData.length" [pageSize]="pageSize" (pageChange)="onPageChange($event)">
+      </app-paginator>
     </div>
 
-
-    <!-- Chart Section -->
     <div class="chart-container">
       <div class="budgetEdit">
         <div class="input">
           <h5 class="budget-header">Budget <span class="edit-link" *ngIf="!editBudget"
-              (click)="toggleEditBudget()">Edit</span></h5>
+              (click)="toggleEditBudget()" id="editBudget">Edit</span></h5>
           <div class="input-container budget" *ngIf="editBudget">
-            <input class="form-control budget"[(ngModel)]="totalBudget"  placeholder="Enter Budget in CR" />
+            <input id="budgetInput" class="form-control budget" [(ngModel)]="totalBudget"
+              placeholder="Enter Budget in CR" />
           </div>
         </div>
-        <button mat-raised-button class="createBtn enterBudget" (click)="toggleEditBudget()" *ngIf="editBudget">Enter Budget</button>
+        <button id="enterBudgetBtn" mat-raised-button class="createBtn enterBudget" (click)="toggleEditBudget()"
+          *ngIf="editBudget">Enter
+          Budget</button>
       </div>
       <app-donut-chart [tableData]="chartData" [usedAmount]="usedAmount" [totalBudget]="totalBudget"
         [remainingAmount]="remainingAmount"></app-donut-chart>

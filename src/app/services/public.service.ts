@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { TableData } from '../interface';
 import { WebSocketSubject } from 'rxjs/webSocket';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +13,13 @@ export class PublicService {
   apiURL = 'http://localhost:8000/';
   private socket$: WebSocketSubject<any>;
   private dataSubject: BehaviorSubject<TableData[]> = new BehaviorSubject<TableData[]>([]);
+  private elementIDSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
+  private loginDataSubject = new BehaviorSubject<{ [key: string]: any }>({});
+  loggedInUser!: string;
 
   constructor(private http: HttpClient) {
     this.socket$ = new WebSocketSubject('ws://localhost:8000/ws/dashboard/');
-    
+
     this.socket$.subscribe(
       (message) => {
         if (typeof message === 'string') {
@@ -23,16 +27,24 @@ export class PublicService {
             const parsedMessage = JSON.parse(message);
             if (Array.isArray(parsedMessage)) {
               this.dataSubject.next(parsedMessage as TableData[]);
+            } else if (parsedMessage && parsedMessage.elementID) {
+              this.elementIDSubject.next(parsedMessage.elementID);
             } else {
-              console.error('Received non-array data:', parsedMessage);
+              console.warn('Received non-array data:', parsedMessage);
             }
           } catch (e) {
-            console.error('Error parsing WebSocket message:', e);
+            console.warn('Error parsing WebSocket message:', e);
           }
         } else if (Array.isArray(message)) {
           this.dataSubject.next(message as TableData[]);
-        } else {
-          console.error('Unexpected WebSocket message format:', message);
+        }
+          else if(message && message['login_update']) {
+            this.loginDataSubject.next(message['logged_in_users']);
+        } else if (message && message['elementID']){
+          this.elementIDSubject.next(message.elementID);
+        }
+         else {
+          console.warn('Unexpected WebSocket message format:', message, );
         }
       },
       (error) => {
@@ -40,12 +52,43 @@ export class PublicService {
       }
     );
   }
-  
+
+  getLoginData() {
+    return this.loginDataSubject.asObservable();
+  }
+
+  sendLoginStatus(action: string, userID: string) {
+    this.loggedInUser = userID;
+    this.socket$.next(JSON.stringify({ action, userID }));
+  }
+
+  login(email: string, password: string) {
+    const loginData = {
+      email: email,
+      password: password
+    };
+
+    const emailParts = email.split('@')[0].split('.');
+    const firstName = emailParts[0] || '';
+    const lastName = emailParts[1] || '';
+    const data = ["login", `${firstName} ${lastName}`]
+    this.sendUpdate(data)
+  }
+
+  sendNameOverWebSocket(data: any): void {
+    this.socket$.next(data);
+  }
+
   getRealTimeData(): Observable<TableData[]> {
     return this.dataSubject.asObservable();
   }
 
+  getRealTimeElementID(): Observable<string | null> {
+    return this.elementIDSubject.asObservable();
+  }
+
   sendUpdate(updatedData: any): void {
+    console.log(updatedData)
     this.socket$.next(JSON.stringify(updatedData));
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { PublicService } from '../../services/public.service';
@@ -33,6 +33,7 @@ export class BudgetComponent implements OnInit {
   usedAmount: number = 0;
   remainingAmount: number = 0;
   editBudget:boolean = false;
+  highlightedElementID: string | null = null;
 
   constructor(private fb: FormBuilder, private publicService: PublicService,private webSocketService: WebSocketService, private planningProjectModal: MatDialog) {
     this.dropdown = this.fb.group({
@@ -54,11 +55,45 @@ export class BudgetComponent implements OnInit {
       this.aggregateBudgetData();
       this.updateBudget(this.chartData);
     });
+
+    this.publicService.getRealTimeElementID().subscribe(
+      (elementID: string | null) => {
+      this.highlightedElementID = elementID;
+        this.highlightElement(elementID);
+      },
+      (error) => {
+        console.error('Error fetching element ID:', error);
+      }
+    );
   }
-  
-  // sendUpdateToWebSocket(): void {
-  //   this.publicService.sendUpdate(this.tableData);
-  // }
+
+  @HostListener('click', ['$event'])
+  onClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    const id = target.id;
+    const activeElements = document.querySelectorAll('.activeElement');
+    activeElements.forEach(element => element.classList.remove('activeElement'));
+
+    if (id) {
+      target.classList.add('activeElement');
+      this.sendElementId(id);
+    }
+  }
+
+  highlightElement(elementID: string | null) {
+    
+    document.querySelectorAll('.activeElement').forEach(el => el.classList.remove('activeElement'));
+    if (elementID) {
+      const element = document.getElementById(elementID);
+      if (element) {
+        element.classList.add('activeElement');
+      }
+    }
+  }
+
+  sendElementId(id: string) {
+    this.publicService.sendUpdate(['tracking', id]);
+  }
 
   updateTableData(): void {
     const startIndex = (this.currentPage - 1) * this.pageSize;
