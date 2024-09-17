@@ -5,7 +5,7 @@ import { PublicService } from '../../services/public.service';
 import { TableData } from '../../interface';
 import { PositionModalComponent } from '../position-modal/position-modal.component';
 import { MatDialog } from '@angular/material/dialog';
-import { WebSocketService } from '../../services/websocket.service';
+import tableData from './data/tableData.js';
 
 @Component({
   selector: 'app-budget',
@@ -34,8 +34,9 @@ export class BudgetComponent implements OnInit {
   remainingAmount: number = 0;
   editBudget:boolean = false;
   highlightedElementID: string | null = null;
+  highlightedElementValue!: string;
 
-  constructor(private fb: FormBuilder, private publicService: PublicService,private webSocketService: WebSocketService, private planningProjectModal: MatDialog) {
+  constructor(private fb: FormBuilder, private publicService: PublicService, private planningProjectModal: MatDialog) {
     this.dropdown = this.fb.group({
       selectedOption: ['designation']
     });
@@ -44,6 +45,11 @@ export class BudgetComponent implements OnInit {
   ngOnInit(): void {
     this.publicService.getTableData().subscribe((result: TableData[]) => {
       this.tableData = result;
+      this.updateTableData();
+      this.aggregateBudgetData();
+      this.updateBudget(this.chartData);
+    }, (error) => {
+      this.tableData = tableData;
       this.updateTableData();
       this.aggregateBudgetData();
       this.updateBudget(this.chartData);
@@ -58,7 +64,10 @@ export class BudgetComponent implements OnInit {
 
     this.publicService.getRealTimeElementID().subscribe(
       (elementID: string | null) => {
-      this.highlightedElementID = elementID;
+        if (elementID && elementID.length > 1){
+          this.highlightedElementID = elementID[0];
+          this.highlightedElementValue = elementID[1];
+        }
         this.highlightElement(elementID);
       },
       (error) => {
@@ -84,22 +93,30 @@ export class BudgetComponent implements OnInit {
     
     document.querySelectorAll('.activeElement').forEach(el => el.classList.remove('activeElement'));
     if (elementID) {
+      if (elementID === "enterBudgetBtn"){
+        this.totalBudget = parseInt(this.highlightedElementValue);
+      }
       const element = document.getElementById(elementID);
       if (element) {
         element.classList.add('activeElement');
       }
+      this.updateTableData();
     }
   }
 
   sendElementId(id: string) {
-    this.publicService.sendUpdate(['tracking', id]);
+    let data = ['tracking', id]
+    if (id === 'enterBudgetBtn'){
+      data = [...data, `${this.totalBudget}`]
+    }
+    this.publicService.sendUpdate(data);
   }
 
   updateTableData(): void {
     const startIndex = (this.currentPage - 1) * this.pageSize;
     const endIndex = startIndex + this.pageSize;
     this.paginatedData = this.tableData.slice(startIndex, endIndex);
-    this.dataSource.data = this.paginatedData;
+    this.dataSource.data = [...this.paginatedData];
   }
 
   aggregateBudgetData(): void {
@@ -123,7 +140,7 @@ export class BudgetComponent implements OnInit {
   }
   
   updateBudget(data: any[]) {
-    this.usedAmount = data.reduce((sum, item) => sum + item.y, 0) / 100;
+    this.usedAmount = 18;
     this.remainingAmount = this.totalBudget - this.usedAmount;
 }
 
@@ -139,8 +156,12 @@ export class BudgetComponent implements OnInit {
   }
 
   openPlanningProjectModal(){
-    this.planningProjectModal.open(PositionModalComponent, {
+    const dialogRef = this.planningProjectModal.open(PositionModalComponent, {
       width: '720px',
+    });
+
+    dialogRef.componentInstance.updateTableEvent.subscribe(() => {
+      this.updateTableData(); // Call your method to update table data
     });
   }
   

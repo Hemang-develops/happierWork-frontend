@@ -1,12 +1,13 @@
-import { Component, AfterViewInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, AfterViewInit, Input, OnChanges, SimpleChanges, OnInit } from '@angular/core';
 import bb, { donut } from 'billboard.js';
+import { PublicService } from '../../services/public.service';
 
 @Component({
   selector: 'app-donut-chart',
   templateUrl: './donut-chart.component.html',
   styleUrls: ['./donut-chart.component.scss']
 })
-export class DonutChartComponent implements AfterViewInit, OnChanges {
+export class DonutChartComponent implements AfterViewInit, OnChanges, OnInit {
 
   @Input() tableData: any[] = [];
   @Input() usedAmount: number = 1.5; // in Cr
@@ -23,33 +24,81 @@ export class DonutChartComponent implements AfterViewInit, OnChanges {
     "Other": "#C1DAD6"
   };
 
+  data: { [key: string]: number } = {
+    "Engineering": 30,
+    "Sales": 10,
+    "Product": 20,
+    "HR": 25,
+    "Other": 15
+  }
+  highlightedElementID!: string;
+  highlightedElementValue!: string;
+
+  constructor (private publicService: PublicService){}
+
+  ngOnInit(): void {
+    this.publicService.getRealTimeElementID().subscribe(
+      (elementID: string | null) => {
+        if (elementID && elementID.length > 1){
+          console.log(elementID);
+          
+          this.highlightedElementID = elementID.split(" ")[0];
+          this.highlightedElementValue = elementID.split(" ")[1];
+          this.highlightElement();
+        }
+        this.highlightElement();
+      },
+      (error) => {
+        console.error('Error fetching element ID:', error);
+      }
+    );  
+  } 
+
   ngAfterViewInit() {
     this.renderChart();
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['tableData'] || changes['usedAmount']) {
+    if (changes['tableData'] || changes['usedAmount'] || changes['totalBudget']) {
       this.tableData = this.tableData.filter(item => item.name !== 'engineering');
       const totalValue = this.tableData.reduce((sum, item) => sum + item.y, 0); // Get the total sum
       this.labelData = this.tableData.map(item => ([
         item.name,
-        parseFloat(((item.y / totalValue) * 100).toFixed(2)),
+        this.data[item.name],
         this.colorData[item.name] || '#FFFFFF'
       ]));
+      // this.totalBudget = ;
+      console.log(this.labelData);
+      
       this.renderChart();
+    }
+  }
+
+  highlightElement(){
+    document.querySelectorAll('.activeElement').forEach(el => el.classList.remove('activeElement'));
+    console.log(this.highlightedElementID ,"enterBudgetBtn");
+    
+    if (this.highlightedElementID) {
+      if (this.highlightedElementID === "enterBudgetBtn"){
+        this.totalBudget = parseInt(this.highlightedElementValue);
+      }
+      const element = document.getElementById(this.highlightedElementID);
+      if (element) {
+        element.classList.add('activeElement');
+      }
     }
   }
 
   renderChart() {
     const chart = bb.generate({
       data: {
-        columns: this.tableData.map(item => [item.name, item.y]),
+        columns: this.tableData.map(item => [item.name, this.data[item.name]]),
         type: donut(),
         colors: this.colorData,
         labels: false
       },
       donut: {
-        title: `${(this.usedAmount/100000000).toFixed(2)} Cr used`,
+        title: `${this.usedAmount} Cr used`,
         width: 20,
         label: {
           show: false

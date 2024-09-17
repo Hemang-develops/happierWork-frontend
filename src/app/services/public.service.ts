@@ -4,7 +4,6 @@ import { Injectable } from '@angular/core';
 import { TableData } from '../interface';
 import { WebSocketSubject } from 'rxjs/webSocket';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +17,7 @@ export class PublicService {
   loggedInUser!: string;
 
   constructor(private http: HttpClient) {
-    this.socket$ = new WebSocketSubject('ws://localhost:8000/ws/dashboard/');
+    this.socket$ = new WebSocketSubject('ws://localhost:8001/ws/dashboard/');
 
     this.socket$.subscribe(
       (message) => {
@@ -41,6 +40,8 @@ export class PublicService {
           else if(message && message['login_update']) {
             this.loginDataSubject.next(message['logged_in_users']);
         } else if (message && message['elementID']){
+          console.log(message.elementID.split(" "));
+          
           this.elementIDSubject.next(message.elementID);
         }
          else {

@@ -1,8 +1,9 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { PublicService } from '../../services/public.service';
+import { BudgetComponent } from '../budget/budget.component';
 
 @Component({
   selector: 'app-position-modal',
@@ -19,6 +20,7 @@ export class PositionModalComponent {
     ['Product', 'Product'],
     ['Other', 'Other']
   ];
+  @Output() updateTableEvent = new EventEmitter<void>(); 
 
   constructor(
     public dialogRef: MatDialogRef<PositionModalComponent>,
@@ -53,6 +55,9 @@ export class PositionModalComponent {
     
     document.querySelectorAll('.activeElement').forEach(el => el.classList.remove('activeElement'));
     if (elementID) {
+      if (elementID === 'closeBtn' || elementID === 'submitBtn'){
+        this.onModalClose();
+      }
       const element = document.getElementById(elementID);
       if (element) {
         element.classList.add('activeElement');
@@ -75,6 +80,7 @@ export class PositionModalComponent {
 
   onSubmit(){
     if(this.positionForm.valid){
+      this.updateTableEvent.emit();
       const formdata = Object.values(this.positionForm.value);
       this.publicService.sendUpdate(["add", ...formdata]);
     }
