@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PublicService } from '../../services/public.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/local-storage.service';
 
 @Component({
   selector: 'app-topbar',
@@ -12,7 +13,7 @@ export class TopbarComponent implements OnInit{
   loggedInUsersArray: string[] = [];
   loggedInUser !: string
 
-  constructor(private publicService: PublicService, private router : Router){
+  constructor(private publicService: PublicService, private router : Router, private authService: AuthService){
     this.loggedInUser = this.publicService.loggedInUser
     this.publicService.getLoginData().subscribe(
       (loggedInUsers) => {
@@ -26,14 +27,6 @@ export class TopbarComponent implements OnInit{
   }
 
   ngOnInit() {
-    const userData = this.localStorageService.getUserData();
-    if (userData) {
-      // Handle the logged-in user data
-      console.log('User is logged in:', userData);
-    } else {
-      // Handle user not logged in
-      console.log('No user is logged in.');
-    }
   }
 
   updateLoggedInUsersDisplay() {
