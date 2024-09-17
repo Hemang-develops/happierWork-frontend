@@ -51,6 +51,31 @@ This Angular-based web application helps in managing budgets and positions withi
 
    The production-ready files will be stored in the `dist/` directory.
 
+## Navigating the Application
+
+1. **Login**:
+   - Open the application at [http://localhost:4200](http://localhost:4200) for the local development version.
+   - Use any valid email address and a password with at least 8 characters to log in.
+
+2. **Dashboard Overview**:
+   - Once logged in, you’ll be redirected to the dashboard where you can see an interactive overview of the budget data and positions.
+
+3. **Managing Positions**:
+   - To add a new position, click on the **“+ Create Position”** button (represented by a + icon) usually found on the dashboard or within a specific section for managing positions.
+   - A modal dialog will open where you can enter details for the new position such as designation, department, budget, and location.
+   - After entering the details, click on the **“Create”** button to submit.
+
+4. **Real-Time Updates**:
+   - After creating or modifying a position, the table and other relevant sections will update dynamically to reflect the changes.
+   - All updates are synchronized in real-time, so if multiple users are making changes simultaneously, everyone will see the latest information without needing to refresh the page.
+
+5. **Interactive Features**:
+   - The dashboard includes a donut chart and other visual components for easy understanding of the budget distribution. Interactions with these components will also be reflected in real-time.
+
+6. **Live Demo**:
+   - For a static preview of the frontend, you can visit the deployed application on Vercel at [https://happier-work-frontend.vercel.app/budget](https://happier-work-frontend.vercel.app/budget). Note that this version displays static data and does not include real-time synchronization functionalities.
+   - To experience real-time synchronization, you need to run the backend locally on the same machine as the frontend. Instructions for running the backend can be found in the [README file of the backend repository](https://github.com/Hemang-develops/happierWork-backend/).
+
 ## Project Structure
 
 - **`/src/app/components/`**: Contains the main UI components, such as the budget table, donut chart, and modal dialog for adding positions.
