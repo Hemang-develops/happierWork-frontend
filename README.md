@@ -19,7 +19,7 @@ This Angular-based web application helps in managing budgets and positions withi
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/happierWork-frontend.git
+   git clone [https://github.com/happierWork-frontend.git](https://github.com/Hemang-develops/happierWork-frontend.git)
    cd happierWork-frontend
    ```
 
