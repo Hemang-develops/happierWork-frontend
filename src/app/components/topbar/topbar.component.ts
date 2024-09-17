@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PublicService } from '../../services/public.service';
 import { Router } from '@angular/router';
 
@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   templateUrl: './topbar.component.html',
   styleUrl: './topbar.component.scss'
 })
-export class TopbarComponent {
+export class TopbarComponent implements OnInit{
   loggedInUsers: { [key: string]: any } = {};
   loggedInUsersArray: string[] = [];
   loggedInUser !: string
@@ -23,6 +23,17 @@ export class TopbarComponent {
         console.error('Error fetching login data:', error);
       }
     );
+  }
+
+  ngOnInit() {
+    const userData = this.localStorageService.getUserData();
+    if (userData) {
+      // Handle the logged-in user data
+      console.log('User is logged in:', userData);
+    } else {
+      // Handle user not logged in
+      console.log('No user is logged in.');
+    }
   }
 
   updateLoggedInUsersDisplay() {

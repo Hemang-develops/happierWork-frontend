@@ -67,16 +67,14 @@ export class DonutChartComponent implements AfterViewInit, OnChanges, OnInit {
         this.data[item.name],
         this.colorData[item.name] || '#FFFFFF'
       ]));
-      // this.totalBudget = ;
-      console.log(this.labelData);
-      
+      // console.log(this.labelData);      
       this.renderChart();
     }
   }
 
   highlightElement(){
     document.querySelectorAll('.activeElement').forEach(el => el.classList.remove('activeElement'));
-    console.log(this.highlightedElementID ,"enterBudgetBtn");
+    // console.log(this.highlightedElementID ,"enterBudgetBtn");
     
     if (this.highlightedElementID) {
       if (this.highlightedElementID === "enterBudgetBtn"){

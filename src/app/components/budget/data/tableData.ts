@@ -1,6 +1,6 @@
 import { TableData } from "../../../interface";
 
-let tableData : TableData[] = [ 
+let tableData = [ 
     {
         "id": "52dcc042247278",
         "designation": "QAA",
