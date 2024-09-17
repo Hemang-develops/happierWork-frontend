@@ -140,14 +140,8 @@ input.form-control:focus {
     z-index: 1000;
 }
 
-
-.activeElement {
-    border: 2px solid blue; /* Example style */
-    transition: border-color 0.3s;
-  }
-
   input.form-control:focus {
-    // border-color: #FFB414;
+    border-color: #FFB414;
     outline: none;
     box-shadow: none;
 }
