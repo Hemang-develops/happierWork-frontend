@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PublicService } from '../../services/public.service';
+import { LocalStorageService } from '../../services/local-storage.service';
 
 
 @Component({
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit{
   loginForm !:FormGroup;
   errorMessage: string | null = null;
 
-  constructor (private router : Router, private fb: FormBuilder, private publicService: PublicService){
+  constructor (private router : Router, private fb: FormBuilder, private publicService: PublicService, private localStorageService: LocalStorageService){
       this.loginForm = this.fb.group({
         email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required, Validators.minLength(8)]]
@@ -43,6 +44,9 @@ export class LoginComponent implements OnInit{
     let userID = this.extractUsername()
     console.log(userID)
     this.publicService.sendLoginStatus('login', userID);
+
+    this.localStorageService.setItem('user', { id: this.loginForm.value.email, name: userID });
+    const data = { name: userID };
   }
 
   get f(){

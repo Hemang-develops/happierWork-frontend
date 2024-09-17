@@ -11,8 +11,19 @@ import { Observable, BehaviorSubject } from 'rxjs';
 export class PublicService {
   apiURL = 'http://localhost:8000/';
   private socket$: WebSocketSubject<any>;
-  private dataSubject: BehaviorSubject<TableData[]> = new BehaviorSubject<TableData[]>([]);
+
+  private defaultTableData: TableData = {
+    id: '',
+    designation: '',
+    department: '',
+    budget: 0,
+    location: '',
+    lastUpdated: ['', '']
+  };
+
+  private dataSubject: BehaviorSubject<TableData> = new BehaviorSubject<TableData>(this.defaultTableData);
   private elementIDSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
+  private deleteIDSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
   private loginDataSubject = new BehaviorSubject<{ [key: string]: any }>({});
   loggedInUser!: string;
 
@@ -24,9 +35,8 @@ export class PublicService {
         if (typeof message === 'string') {
           try {
             const parsedMessage = JSON.parse(message);
-            if (Array.isArray(parsedMessage)) {
-              this.dataSubject.next(parsedMessage as TableData[]);
-            } else if (parsedMessage && parsedMessage.elementID) {
+            console.log(parsedMessage);
+            if (parsedMessage && parsedMessage.elementID) {
               this.elementIDSubject.next(parsedMessage.elementID);
             } else {
               console.warn('Received non-array data:', parsedMessage);
@@ -34,18 +44,22 @@ export class PublicService {
           } catch (e) {
             console.warn('Error parsing WebSocket message:', e);
           }
-        } else if (Array.isArray(message)) {
-          this.dataSubject.next(message as TableData[]);
+        } else if (message && message['entry']) {
+          message['entry']['budget'] = parseInt(message['entry']['budget'])
+          this.dataSubject.next(message['entry']);
+        } else if (message && message['deleted_id']) {
+          console.log(message);
+          this.deleteIDSubject.next(message['deleted_id']);
         }
-          else if(message && message['login_update']) {
-            this.loginDataSubject.next(message['logged_in_users']);
-        } else if (message && message['elementID']){
+        else if (message && message['login_update']) {
+          this.loginDataSubject.next(message['logged_in_users']);
+        } else if (message && message['elementID']) {
           console.log(message.elementID.split(" "));
-          
+
           this.elementIDSubject.next(message.elementID);
         }
-         else {
-          console.warn('Unexpected WebSocket message format:', message, );
+        else {
+          console.warn('Unexpected WebSocket message format:', message);
         }
       },
       (error) => {
@@ -80,7 +94,7 @@ export class PublicService {
     this.socket$.next(data);
   }
 
-  getRealTimeData(): Observable<TableData[]> {
+  getRealTimeData(): Observable<TableData> {
     return this.dataSubject.asObservable();
   }
 
@@ -88,8 +102,11 @@ export class PublicService {
     return this.elementIDSubject.asObservable();
   }
 
+  getRealTimeDeleteID(): Observable<string | null> {
+    return this.deleteIDSubject.asObservable();
+  }
+
   sendUpdate(updatedData: any): void {
-    console.log(updatedData)
     this.socket$.next(JSON.stringify(updatedData));
   }
 

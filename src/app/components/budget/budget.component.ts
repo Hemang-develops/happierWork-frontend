@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { PublicService } from '../../services/public.service';
@@ -13,7 +13,7 @@ import tableData from './data/tableData.js';
   styleUrls: ['./budget.component.scss'],  // Corrected from 'styleUrl' to 'styleUrls'
 })
 
-export class BudgetComponent implements OnInit {
+export class BudgetComponent implements OnInit, OnChanges {
   dropdown!: FormGroup;
   dropdownOptions = [
     ['designation', 'Designation'],
@@ -32,7 +32,7 @@ export class BudgetComponent implements OnInit {
   totalBudget: number = 20;
   usedAmount: number = 0;
   remainingAmount: number = 0;
-  editBudget:boolean = false;
+  editBudget: boolean = false;
   highlightedElementID: string | null = null;
   highlightedElementValue!: string;
 
@@ -54,17 +54,29 @@ export class BudgetComponent implements OnInit {
       this.aggregateBudgetData();
       this.updateBudget(this.chartData);
     });
-    
+
     this.publicService.getRealTimeData().subscribe((realTimeData) => {
-      this.tableData = realTimeData;
+      this.tableData = [realTimeData, ...this.tableData];
       this.updateTableData();
       this.aggregateBudgetData();
       this.updateBudget(this.chartData);
     });
 
+    this.publicService.getRealTimeDeleteID().subscribe(
+      (elementID: string | null) => {
+        const id = elementID || ''
+        this.tableData = this.tableData.filter(rows => rows.id !== id);
+        this.updateTableData();
+        this.aggregateBudgetData();
+      },
+      (error) => {
+        console.error('Error fetching element ID:', error);
+      }
+    );
+
     this.publicService.getRealTimeElementID().subscribe(
       (elementID: string | null) => {
-        if (elementID && elementID.length > 1){
+        if (elementID && elementID.length > 1) {
           this.highlightedElementID = elementID[0];
           this.highlightedElementValue = elementID[1];
         }
@@ -74,6 +86,17 @@ export class BudgetComponent implements OnInit {
         console.error('Error fetching element ID:', error);
       }
     );
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('here');
+    if (changes['tableData']) {
+      console.log('here');
+      this.updateTableData();
+      this.updateTableData();
+      this.aggregateBudgetData();
+      this.updateBudget(this.chartData);
+    }
   }
 
   @HostListener('click', ['$event'])
@@ -90,10 +113,10 @@ export class BudgetComponent implements OnInit {
   }
 
   highlightElement(elementID: string | null) {
-    
+
     document.querySelectorAll('.activeElement').forEach(el => el.classList.remove('activeElement'));
     if (elementID) {
-      if (elementID === "enterBudgetBtn"){
+      if (elementID === "enterBudgetBtn") {
         this.totalBudget = parseInt(this.highlightedElementValue);
       }
       const element = document.getElementById(elementID);
@@ -106,7 +129,7 @@ export class BudgetComponent implements OnInit {
 
   sendElementId(id: string) {
     let data = ['tracking', id]
-    if (id === 'enterBudgetBtn'){
+    if (id === 'enterBudgetBtn') {
       data = [...data, `${this.totalBudget}`]
     }
     this.publicService.sendUpdate(data);
@@ -138,11 +161,11 @@ export class BudgetComponent implements OnInit {
       y: departmentBudgets[department]
     }));
   }
-  
+
   updateBudget(data: any[]) {
     this.usedAmount = 18;
     this.remainingAmount = this.totalBudget - this.usedAmount;
-}
+  }
 
 
   onPageChange(page: number) {
@@ -150,12 +173,12 @@ export class BudgetComponent implements OnInit {
     this.updateTableData();
   }
 
-  toggleEditBudget(){
+  toggleEditBudget() {
     this.editBudget = !this.editBudget;
     this.updateBudget(this.chartData);
   }
 
-  openPlanningProjectModal(){
+  openPlanningProjectModal() {
     const dialogRef = this.planningProjectModal.open(PositionModalComponent, {
       width: '720px',
     });
@@ -164,9 +187,9 @@ export class BudgetComponent implements OnInit {
       this.updateTableData(); // Call your method to update table data
     });
   }
-  
-  deletePosition(id:string){
-    this.tableData = this.tableData.filter(rows => rows.id !== id);    
+
+  deletePosition(id: string) {
+    this.tableData = this.tableData.filter(rows => rows.id !== id);
     this.updateTableData();
     this.aggregateBudgetData();
     this.publicService.sendUpdate(["delete", id]);
