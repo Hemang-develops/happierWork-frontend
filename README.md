@@ -55,7 +55,7 @@ This Angular-based web application helps in managing budgets and positions withi
 
 1. **Login**:
    - Open the application at [http://localhost:4200](http://localhost:4200) for the local development version.
-   - Use any valid email address and a password with at least 8 characters to log in.
+   - Use any valid email address (just requires valid email format) and a password with at least 8 characters to log in. Note that the login form only checks for email format and minimum password length, and does not verify credentials against a real user database.
 
 2. **Dashboard Overview**:
    - Once logged in, you’ll be redirected to the dashboard where you can see an interactive overview of the budget data and positions.
