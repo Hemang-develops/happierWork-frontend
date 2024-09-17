@@ -1,4 +1,4 @@
-# Happier - Frontend
+# Happierwork - Frontend
 
 This Angular-based web application helps in managing budgets and positions within an organization. The project includes real-time updates for table data, WebSocket integration, and a modal for adding new positions to the list.
 
