@@ -28,7 +28,8 @@ export class PublicService {
   loggedInUser!: string;
 
   constructor(private http: HttpClient) {
-    this.socket$ = new WebSocketSubject('ws://localhost:8001/ws/dashboard/');
+    this.socket$ = new WebSocketSubject('ws://happierwork-backend-production.up.railway.app/ws/dashboard/');
+    // this.socket$ = new WebSocketSubject('ws://localhost:8001/ws/dashboard/');
 
     this.socket$.subscribe(
       (message) => {
