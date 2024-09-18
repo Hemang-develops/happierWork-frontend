@@ -33,19 +33,7 @@ export class PublicService {
 
     this.socket$.subscribe(
       (message) => {
-        if (typeof message === 'string') {
-          try {
-            const parsedMessage = JSON.parse(message);
-            console.log(parsedMessage);
-            if (parsedMessage && parsedMessage.elementID) {
-              this.elementIDSubject.next(parsedMessage.elementID);
-            } else {
-              console.warn('Received non-array data:', parsedMessage);
-            }
-          } catch (e) {
-            console.warn('Error parsing WebSocket message:', e);
-          }
-        } else if (message && message['entry']) {
+        if (message && message['entry']) {
           message['entry']['budget'] = parseInt(message['entry']['budget'])
           this.dataSubject.next(message['entry']);
         } else if (message && message['deleted_id']) {
