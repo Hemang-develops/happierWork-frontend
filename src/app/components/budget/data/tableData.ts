@@ -2,39 +2,6 @@ import { TableData } from "../../../interface";
 
 let tableData = [ 
     {
-        "id": "52dcc042247278",
-        "designation": "QAA",
-        "department": "Engineering",
-        "budget": 12,
-        "location": "Ahmedabad",
-        "lastUpdated": [
-            "Admin",
-            "Sep 17, 2024 04:17 AM"
-        ]
-    },
-    {
-        "id": "8c0b3c7c5fad7c",
-        "designation": "qa",
-        "department": "Engineering",
-        "budget": 11,
-        "location": "Ahmedabad",
-        "lastUpdated": [
-            "Admin",
-            "Sep 17, 2024 04:16 AM"
-        ]
-    },
-    {
-        "id": "8b4cba1aeceb0c",
-        "designation": "UI",
-        "department": "Engineering",
-        "budget": 11,
-        "location": "Ahmedabad",
-        "lastUpdated": [
-            "Admin",
-            "Sep 17, 2024 04:06 AM"
-        ]
-    },
-    {
         "id": "0be30cc0d3f126",
         "designation": "UI developer",
         "department": "Engineering",

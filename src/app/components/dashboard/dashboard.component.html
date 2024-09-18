@@ -4,7 +4,7 @@
                 <button class="add-project" mat-button (click)="openPlanningProjectModal()">+</button>
             </div>
             <div class="project-container">
-                <div class="projects" *ngFor="let project of projects">
+                <div class="projects" *ngFor="let project of projects"  [routerLink]="['/budget']">
                     <div class="top part">
                         <p class="title"><strong>Project: {{project.name}}</strong></p>
                         <small class="subtitle">Planning for {{project.name}}</small>

@@ -74,14 +74,12 @@ input.form-control {
 }
 
 .search{
-    padding: 0.75rem;
+    padding: 0.75rem 2rem;
     width: 18rem;
 }
 
-// input.form-control
 .search::placeholder {
     color: #C1C7D0;
-    padding-left: 1rem;
 }
 
 input.form-control:focus {

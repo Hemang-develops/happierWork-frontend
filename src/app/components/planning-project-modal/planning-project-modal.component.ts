@@ -37,7 +37,6 @@ export class PlanningProjectModalComponent implements OnInit{
       console.log('Form value:', this.planningProjectForm.value);
     }
     this.onModalClose()
-    this.router.navigate(['/dashboard']);
   }
 
 }
