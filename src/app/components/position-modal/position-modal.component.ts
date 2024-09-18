@@ -85,6 +85,6 @@ export class PositionModalComponent {
       this.publicService.sendUpdate(["add", ...formdata]);
     }
     this.onModalClose()
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/budget']);
   }
 }

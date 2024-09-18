@@ -5,6 +5,7 @@ import { PlanningProjectModalComponent } from '../planning-project-modal/plannin
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes } from '@angular/router';
+import { DashboardRoutingModule } from './dashboard-routing.module';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent } // Default route for the Dashboard
@@ -19,7 +20,8 @@ const routes: Routes = [
     MatDialogModule,
     ReactiveFormsModule,
     FormsModule,
-    CommonModule
+    CommonModule,
+    DashboardRoutingModule
   ]
 })
 export class DashboardModule { }
